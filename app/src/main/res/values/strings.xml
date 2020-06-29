@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">Cigarette électrique</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Menu</string>
+    <string name="nav_header_desc">Navigation header</string>
+
+    <!-- Menu labels-->
+    <string name="menu_home">Accueil</string>
+    <string name="menu_arome">Arôme</string>
+    <string name="menu_booster">Booster</string>
+    <string name="menu_admin">Admin</string>
+    <string name="menu_admin_preparation">Ajouter une préparation</string>
+    <string name="menu_admin_arome">Ajouter un arome</string>
+    <string name="menu_admin_booster">Ajouter un booster</string>
+
+    <string name="home_fragment">Home fragment</string>
+    <string name="arome_fragment">Arome fragment</string>
+    <string name="booster_fragment">Booster fragment</string>
+    <string name="admin_arome_fragment">Admin Arome fragment</string>
+    <string name="admin_booster_fragment">Admin Booster fragment</string>
+
+    <!-- Placeholders -->
+    <string name="ph_qty">Quantité</string>
+    <string name="ph_capacity">Capacité</string>
+    <string name="ph_note">Note</string>
+    <string name="create">Créer</string>
+    <string name="image">Image...</string>
+    <string name="ph_marque">Marque</string>
+    <string name="ph_pgvg">Pgvg</string>
+    <string name="ph_arome">Arôme</string>
+</resources>

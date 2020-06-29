@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:id="@+id/grp1" android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_menu_home"
+            android:title="@string/menu_home"/>
+        <item
+            android:id="@+id/nav_arome"
+            android:icon="@drawable/ic_menu_arome"
+            android:title="@string/menu_arome" />
+        <item
+            android:id="@+id/nav_booster"
+            android:icon="@drawable/ic_menu_booster"
+            android:title="@string/menu_booster" />
+
+    </group>
+
+    <group android:id="@+id/grp2" android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_admin_preparation"
+            android:icon="@drawable/ic_menu_admin"
+            android:title="@string/menu_admin_preparation" />
+        <item
+            android:id="@+id/nav_admin_arome"
+            android:icon="@drawable/ic_menu_admin"
+            android:title="@string/menu_admin_arome" />
+        <item
+            android:id="@+id/nav_admin_booster"
+            android:icon="@drawable/ic_menu_admin"
+            android:title="@string/menu_admin_booster" />
+    </group>
+
+</menu>

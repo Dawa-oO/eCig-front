@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp">
+
+            <ImageView
+                android:id="@+id/aromeImageView"
+                android:layout_width="100dp"
+                android:layout_height="120dp"
+                android:padding="4dp" />
+
+            <!-- Gout - Capacity - mL-->
+            <TextView
+                android:id="@+id/aromeTaste"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_toEndOf="@id/aromeImageView"
+                android:text="Arome"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/aromeCapacity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/aromeTaste"
+                android:layout_marginStart="5dp"
+                android:text="Capacity" />
+            <TextView
+                android:id="@+id/aromeCapacityUnit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/aromeCapacity"
+                android:layout_marginStart="5dp"
+                android:text="mL" />
+
+            <!-- Marque -->
+            <TextView
+                android:id="@+id/aromeBrand"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/aromeTaste"
+                android:layout_marginStart="5dp"
+                android:layout_toEndOf="@id/aromeImageView"
+                android:text="Marque"
+                android:textStyle="italic" />
+
+            <!-- Note label - note -->
+            <TextView
+                android:id="@+id/aromeNoteLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/aromeBrand"
+                android:layout_toEndOf="@id/aromeImageView"
+                android:layout_marginStart="5dp"
+                android:text="Note : " />
+            <TextView
+                android:id="@+id/aromeNote"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/aromeBrand"
+                android:layout_toEndOf="@id/aromeNoteLabel"
+                android:layout_marginStart="5dp"
+                android:text="Note" />
+
+            <View
+                android:id="@+id/aromeSeparator"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/aromeNoteLabel"
+                android:layout_toEndOf="@id/aromeImageView"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:background="@android:color/darker_gray"/>
+
+            <!-- remove - quantity - add -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginStart="5dp"
+                android:layout_below="@id/aromeSeparator"
+                android:layout_toEndOf="@id/aromeImageView">
+
+                <ImageButton
+                    android:id="@+id/aromeQuantityRemove"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#FFFFFF"
+                    app:srcCompat="@drawable/ic_remove" />
+
+                <TextView
+                    android:id="@+id/aromeQuantity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:gravity="center_vertical"
+                    android:inputType="number"
+                    android:text="Quantity" />
+
+                <ImageButton
+                    android:id="@+id/aromeQuantityAdd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#FFFFFF"
+                    app:srcCompat="@drawable/ic_add" />
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+
+    </androidx.cardview.widget.CardView>
+</LinearLayout>
