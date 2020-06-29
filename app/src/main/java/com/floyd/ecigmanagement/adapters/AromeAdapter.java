@@ -62,9 +62,7 @@ public class AromeAdapter extends RecyclerView.Adapter<AromeAdapter.AromeViewHol
         AromeUio aromeUioItem = aromeUioList.get(position);
 
         //binding the data with the viewholder views
-        //holder.aromeImageView.setImageDrawable(mCtx.getResources().getDrawable(R.drawable.ic_menu_arome, null));
         String url = constructAromeImageUrl(aromeUioItem.getId());
-        Log.d(TAG, "URL of arome image : " + url);
         Picasso.get().load(url).placeholder(R.drawable.ic_menu_arome).into(holder.aromeImageView);
 
         holder.textViewQuantity.setText(String.valueOf(aromeUioItem.getQuantity()));

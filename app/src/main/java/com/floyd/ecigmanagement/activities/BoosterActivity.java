@@ -2,6 +2,7 @@ package com.floyd.ecigmanagement.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -14,7 +15,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.floyd.ecigmanagement.R;
 import com.floyd.ecigmanagement.adapters.BoosterAdapter;
+import com.floyd.ecigmanagement.clients.ClientInstance;
+import com.floyd.ecigmanagement.models.Booster;
+import com.floyd.ecigmanagement.services.BoosterService;
+import com.floyd.ecigmanagement.translators.BoosterTranslator;
 import com.floyd.ecigmanagement.uio.BoosterUio;
+import com.floyd.ecigmanagement.utils.Utils;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
@@ -22,6 +28,11 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import static com.floyd.ecigmanagement.enums.Level.ERROR;
 
 public class BoosterActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -41,6 +52,8 @@ public class BoosterActivity extends AppCompatActivity implements NavigationView
     RecyclerView recyclerView;
 
     List<BoosterUio> boosterUioList;
+
+    BoosterService boosterService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,16 +144,50 @@ public class BoosterActivity extends AppCompatActivity implements NavigationView
         //initializing the boosterlist
         boosterUioList = new ArrayList<>();
 
-        this.mockBoosterList();
+        // mock the list
+        //this.mockBoosterList();
 
-        //creating recyclerview adapter
-        BoosterAdapter adapter = new BoosterAdapter(this, boosterUioList);
-
-        //setting adapter to recyclerview
-        recyclerView.setAdapter(adapter);
+        // Call server to get booster list and populate recycleurLayout
+        this.fillBoosterList(this);
     }
 
     private void mockBoosterList() {
         boosterUioList.add(new BoosterUio(1, 25, 10, "50/50", ""));
+    }
+
+    private void fillBoosterList(BoosterActivity boosterActivity) {
+        Log.d(TAG, "Starting to fill booster uio list");
+
+        // Initialize services
+        boosterService = ClientInstance.getBoosterService();
+
+        Call<List<Booster>> call = boosterService.getAllBoosters();
+
+        call.enqueue(new Callback<List<Booster>>() {
+            @Override
+            public void onResponse(Call<List<Booster>> call, Response<List<Booster>> response) {
+                if(response.isSuccessful()) {
+                    Log.d(TAG, "Starting to add " + response.body().size() + " to list");
+                    for (Booster booster : response.body()) {
+                        Log.d(TAG, booster.toString());
+                        boosterUioList.add(BoosterTranslator.translateBoosterToBoosterUio(booster));
+                    }
+                    Log.d(TAG, "Finishing to add " + response.body().size() + " aromes to uio list");
+                    //creating recyclerview adapter
+                    BoosterAdapter adapter = new BoosterAdapter(boosterActivity, boosterUioList);
+
+
+                    //setting adapter to recyclerview
+                    recyclerView.setAdapter(adapter);
+                }  else {
+                    Log.d(TAG, response.errorBody().toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Booster>> call, Throwable t) {
+                Utils.displayToastyToaster(BoosterActivity.this, ERROR, "Something went wrong...Please try later !");
+            }
+        });
     }
 }
