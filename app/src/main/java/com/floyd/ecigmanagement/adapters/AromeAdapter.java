@@ -18,7 +18,9 @@ import com.floyd.ecigmanagement.clients.ClientInstance;
 import com.floyd.ecigmanagement.models.Arome;
 import com.floyd.ecigmanagement.services.AromeService;
 import com.floyd.ecigmanagement.uio.AromeUio;
+import com.floyd.ecigmanagement.utils.Constants;
 import com.floyd.ecigmanagement.utils.Utils;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -60,7 +62,10 @@ public class AromeAdapter extends RecyclerView.Adapter<AromeAdapter.AromeViewHol
         AromeUio aromeUioItem = aromeUioList.get(position);
 
         //binding the data with the viewholder views
-        holder.aromeImageView.setImageDrawable(mCtx.getResources().getDrawable(R.drawable.ic_menu_arome, null));
+        //holder.aromeImageView.setImageDrawable(mCtx.getResources().getDrawable(R.drawable.ic_menu_arome, null));
+        String url = constructAromeImageUrl(aromeUioItem.getId());
+        Log.d(TAG, "URL of arome image : " + url);
+        Picasso.get().load(url).placeholder(R.drawable.ic_menu_arome).into(holder.aromeImageView);
 
         holder.textViewQuantity.setText(String.valueOf(aromeUioItem.getQuantity()));
         holder.textViewNote.setText(String.valueOf(aromeUioItem.getNote()));
@@ -133,6 +138,10 @@ public class AromeAdapter extends RecyclerView.Adapter<AromeAdapter.AromeViewHol
 
             }
         });
+    }
+
+    private String constructAromeImageUrl(int id) {
+        return Constants.BACK_AROME_IMAGE_URL + id + ".jpg";
     }
 
     @Override
