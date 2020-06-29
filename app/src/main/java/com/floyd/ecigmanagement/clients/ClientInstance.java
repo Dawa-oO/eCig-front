@@ -3,6 +3,7 @@ package com.floyd.ecigmanagement.clients;
 import android.util.Log;
 
 import com.floyd.ecigmanagement.services.AromeService;
+import com.floyd.ecigmanagement.services.BoosterService;
 import com.floyd.ecigmanagement.utils.Constants;
 
 import okhttp3.OkHttpClient;
@@ -15,25 +16,40 @@ public class ClientInstance {
     private static final String TAG = "CLIENT_INSTANCE";
 
     private static AromeService aromeService;
+    private static BoosterService boosterService;
 
     public static AromeService getAromeService() {
         Log.d(TAG, "getAromeService");
         if (aromeService == null) {
-            Log.d(TAG, "aromService is null, instanciate new one");
-
-            HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-            interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-            OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
-
 
             Retrofit retrofit = new retrofit2.Retrofit.Builder()
                     .baseUrl(Constants.BACK_API_URL)
-                    .client(client)
+                    .client(getClientLoggingInterceptor())
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
             aromeService = retrofit.create(AromeService.class);
         }
 
         return aromeService;
+    }
+
+    public static BoosterService getBoosterService() {
+        Log.d(TAG, "getBoosterService");
+
+        if (boosterService == null) {
+            Retrofit retrofit = new retrofit2.Retrofit.Builder()
+                    .baseUrl(Constants.BACK_API_URL)
+                    .client(getClientLoggingInterceptor())
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+            boosterService = retrofit.create(BoosterService.class);
+        }
+        return boosterService;
+    }
+
+    private static OkHttpClient getClientLoggingInterceptor() {
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        return new OkHttpClient.Builder().addInterceptor(interceptor).build();
     }
 }
