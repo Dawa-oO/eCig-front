@@ -5,8 +5,8 @@ import lombok.Data;
 @Data
 public class Preparation {
 
-    private Integer id;
+    private int id;
     private Arome arome;
-    private Integer quantity;
-    private Integer capacity;
+    private int quantity;
+    private int capacity;
 }

@@ -9,9 +9,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PreparationUio {
 
-    private Integer id;
+    private int id;
+    private int aromeId;
     private String arome;
-    private Integer quantity;
-    private Integer capacity;
+    private int quantity;
+    private int capacity;
     private String imageUrl;
 }

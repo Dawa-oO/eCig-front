@@ -9,9 +9,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class BoosterUio {
 
-    private Integer id;
-    private Integer quantity;
-    private Integer capacity;
+    private int id;
+    private int quantity;
+    private int capacity;
     private String pgvg;
     private String imageUrl;
 }

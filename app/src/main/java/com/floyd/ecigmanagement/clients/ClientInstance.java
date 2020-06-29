@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.floyd.ecigmanagement.services.AromeService;
 import com.floyd.ecigmanagement.services.BoosterService;
+import com.floyd.ecigmanagement.services.PreparationService;
 import com.floyd.ecigmanagement.utils.Constants;
 
 import okhttp3.OkHttpClient;
@@ -17,6 +18,7 @@ public class ClientInstance {
 
     private static AromeService aromeService;
     private static BoosterService boosterService;
+    private static PreparationService preparationService;
 
     public static AromeService getAromeService() {
         Log.d(TAG, "getAromeService");
@@ -45,6 +47,20 @@ public class ClientInstance {
             boosterService = retrofit.create(BoosterService.class);
         }
         return boosterService;
+    }
+
+    public static PreparationService getPreparationService() {
+        Log.d(TAG, "getPreparationService");
+
+        if (preparationService == null) {
+            Retrofit retrofit = new retrofit2.Retrofit.Builder()
+                    .baseUrl(Constants.BACK_API_URL)
+                    .client(getClientLoggingInterceptor())
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+            preparationService = retrofit.create(PreparationService.class);
+        }
+        return preparationService;
     }
 
     private static OkHttpClient getClientLoggingInterceptor() {
