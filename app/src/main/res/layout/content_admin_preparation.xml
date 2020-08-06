@@ -9,14 +9,55 @@
     tools:showIn="@layout/app_bar_admin_preparation"
     tools:context=".activities.AdminPreparationActivity">
 
-
-    <Switch
-        android:id="@+id/switch1"
-        android:layout_width="wrap_content"
+    <Spinner
+        android:id="@+id/spinner_preparation_arome"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Switch bite"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/et_preparation_capacity"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:hint="@string/ph_capacity"
+        android:ems="10"
+        android:inputType="number"
+        android:textColor="@android:color/holo_orange_dark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/spinner_preparation_arome" />
+
+    <EditText
+        android:id="@+id/et_preparation_qty"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:hint="@string/ph_qty"
+        android:inputType="number"
+        android:textColor="@android:color/holo_orange_dark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_preparation_capacity" />
+
+    <Button
+        android:id="@+id/button_preparation_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/create"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_preparation_qty" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

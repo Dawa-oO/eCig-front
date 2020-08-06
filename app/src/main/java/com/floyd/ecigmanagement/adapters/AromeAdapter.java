@@ -9,17 +9,14 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.floyd.ecigmanagement.R;
-import com.floyd.ecigmanagement.activities.AromeActivity;
 import com.floyd.ecigmanagement.clients.ClientInstance;
 import com.floyd.ecigmanagement.models.Arome;
 import com.floyd.ecigmanagement.services.AromeService;
 import com.floyd.ecigmanagement.uio.AromeUio;
 import com.floyd.ecigmanagement.utils.Constants;
-import com.floyd.ecigmanagement.utils.Utils;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -27,8 +24,6 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import static com.floyd.ecigmanagement.enums.Level.ERROR;
 
 public class AromeAdapter extends RecyclerView.Adapter<AromeAdapter.AromeViewHolder> {
 
