@@ -39,7 +39,7 @@
         android:textColor="@android:color/holo_orange_dark"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_arome_taste"
+        app:layout_constraintTop_toBottomOf="@id/et_arome_taste"
         android:autofillHints="" />
 
     <EditText
@@ -55,7 +55,7 @@
         android:textColor="@android:color/holo_orange_dark"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_arome_brand"
+        app:layout_constraintTop_toBottomOf="@id/et_arome_brand"
         android:autofillHints="" />
 
     <EditText
@@ -71,7 +71,7 @@
         android:textColor="@android:color/holo_orange_dark"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_arome_capacity"
+        app:layout_constraintTop_toBottomOf="@id/et_arome_capacity"
         android:autofillHints="" />
 
     <EditText
@@ -83,30 +83,46 @@
         android:layout_marginEnd="8dp"
         android:ems="10"
         android:hint="@string/ph_note"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         android:textColor="@android:color/holo_orange_dark"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_arome_quantity"
+        app:layout_constraintTop_toBottomOf="@id/et_arome_quantity"
         android:autofillHints="" />
 
+    <TextView
+        android:id="@+id/tv_arome_image"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:text="@string/file_path"
+        android:textColor="@android:color/holo_orange_dark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_arome_note" />
+
     <Button
-        android:id="@+id/button"
+        android:id="@+id/upload_arome_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        android:text="@string/image"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_arome_image" />
+
+    <Button
+        android:id="@+id/button_arome_add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:text="@string/create"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/upload_arome_image" />
+        app:layout_constraintTop_toBottomOf="@id/upload_arome_image" />
 
-    <Button
-        android:id="@+id/upload_arome_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/image"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_arome_note" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
