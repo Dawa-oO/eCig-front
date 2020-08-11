@@ -73,7 +73,6 @@ public class AdminAromeActivity extends AppCompatActivity implements NavigationV
     @BindView(R.id.tv_arome_image)
     TextView filePathTextView;
 
-    private Uri fileUri;
     private String filePath;
 
     @Override
@@ -178,7 +177,7 @@ public class AdminAromeActivity extends AppCompatActivity implements NavigationV
 
 
     @OnClick(R.id.button_arome_add)
-    public void onAddPreparationClick(View view) {
+    public void onAddAromeClick(View view) {
         Log.d(TAG, "Add arome clicked");
 
         if (brandEditText.getText().toString().isEmpty() || capacityEditText.getText().toString().isEmpty() || noteEditText.getText().toString().isEmpty() || quantityEditText.getText().toString().isEmpty() || tasteEditText.getText().toString().isEmpty()) {
@@ -230,7 +229,7 @@ public class AdminAromeActivity extends AppCompatActivity implements NavigationV
 
                 @Override
                 public void onResponse(Call<Arome> call, Response<Arome> response) {
-                    Utils.displayToastyToaster(AdminAromeActivity.this, SUCCESS, "La préparation a été créée !");
+                    Utils.displayToastyToaster(AdminAromeActivity.this, SUCCESS, "L'arome a été créé !");
                 }
 
                 @Override
