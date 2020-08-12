@@ -22,7 +22,7 @@
                 android:layout_height="120dp"
                 android:padding="4dp" />
 
-            <!-- PV/VG label - pgvg -->
+            <!-- PV/VG label - pgvg  - delete -->
             <TextView
                 android:id="@+id/boosterPgVgLabel"
                 android:layout_width="wrap_content"
@@ -38,6 +38,15 @@
                 android:layout_toEndOf="@id/boosterPgVgLabel"
                 android:layout_marginStart="5dp"
                 android:text="PG/VG" />
+
+            <ImageButton
+                android:id="@+id/boosterDelete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:backgroundTint="#FFFFFF"
+                app:srcCompat="@drawable/ic_delete" />
 
             <!-- Capacity - mL -->
             <TextView

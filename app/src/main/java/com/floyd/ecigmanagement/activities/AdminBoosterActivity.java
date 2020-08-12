@@ -218,12 +218,18 @@ public class AdminBoosterActivity extends AppCompatActivity implements Navigatio
             call.enqueue(new Callback<Booster>() {
                 @Override
                 public void onResponse(Call<Booster> call, Response<Booster> response) {
-                    Utils.displayToastyToaster(AdminBoosterActivity.this, SUCCESS, "Le booster a été créé !");
+                    Booster boosterResponse = response.body();
+                    if (boosterResponse != null) {
+                        Utils.displayToastyToaster(AdminBoosterActivity.this, SUCCESS, "Le booster a été créé !");
+                    } else {
+                        Utils.displayToastyToaster(AdminBoosterActivity.this, ERROR, "Something went wrong...Please try later !");
+                    }
+
                 }
 
                 @Override
                 public void onFailure(Call<Booster> call, Throwable t) {
-                    Log.e(TAG, "Error while creating boostger : " + t.getMessage());
+                    Log.e(TAG, "Error while creating booster : " + t.getMessage());
                     Utils.displayToastyToaster(AdminBoosterActivity.this, ERROR, "Something went wrong...Please try later !");
                 }
             });
