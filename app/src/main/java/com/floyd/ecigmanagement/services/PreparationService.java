@@ -6,6 +6,7 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
@@ -24,4 +25,7 @@ public interface PreparationService {
 
     @PUT("preparation/{id}/quantity")
     Call<Preparation> updatePreparationQuantity(@Body int newQuantity, @Path("id") int id);
+
+    @DELETE("preparation/{id}")
+    Call<Boolean> deletePreparation(@Path("id") int id);
 }

@@ -1,6 +1,7 @@
 package com.floyd.ecigmanagement.adapters;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.floyd.ecigmanagement.R;
@@ -126,6 +128,58 @@ public class PreparationAdapter extends RecyclerView.Adapter<PreparationAdapter.
                 }
             }
         });
+
+        holder.imageButtonPreparationDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG, "Button delete preparation clicked; PreparationID = " + preparationUioItem.getId());
+
+                // -- Yes / No modal
+                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which){
+                            case DialogInterface.BUTTON_POSITIVE:
+                                if (preparationUioItem.getId() > 0) {
+                                    Call<Boolean> call = preparationService.deletePreparation(preparationUioItem.getId());
+
+                                    call.enqueue(new Callback<Boolean>() {
+                                        @Override
+                                        public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                                            if (response.isSuccessful()) {
+                                                Boolean responseDelete = response.body();
+                                                if (responseDelete.booleanValue()) {
+                                                    Log.d(TAG, "Preparation is deleted");
+                                                    preparationUioList.remove(position);
+                                                    notifyItemRemoved(position);
+                                                } else {
+                                                    Log.d(TAG, "An error occured when deleting preparation");
+                                                }
+                                            } else {
+                                                Log.d(TAG, response.errorBody().toString());
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onFailure(Call<Boolean> call, Throwable t) {
+                                            Log.e(TAG, "Error when deleting preparation quantity : " + t);
+                                        }
+                                    });
+                                }
+                                break;
+
+                            case DialogInterface.BUTTON_NEGATIVE:
+                                //No button clicked
+                                break;
+                        }
+                    }
+                };
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(mCtx);
+                builder.setMessage("Êtes-vous sûr ?").setPositiveButton("Yes", dialogClickListener)
+                        .setNegativeButton("No", dialogClickListener).show();
+            }
+        });
     }
 
     private String constructPreparationImageUrl(int id) {
@@ -142,7 +196,7 @@ public class PreparationAdapter extends RecyclerView.Adapter<PreparationAdapter.
 
         ImageView preparationImageView;
         TextView textViewTaste, textViewCapacity, textViewQuantity;
-        ImageButton imageButtonRemove, imageButtonAdd;
+        ImageButton imageButtonRemove, imageButtonAdd, imageButtonPreparationDelete;
 
         public PreparationViewHolder(View itemView) {
             super(itemView);
@@ -155,6 +209,7 @@ public class PreparationAdapter extends RecyclerView.Adapter<PreparationAdapter.
 
             imageButtonAdd = itemView.findViewById(R.id.preparationQuantityAdd);
             imageButtonRemove = itemView.findViewById(R.id.preparationQuantityRemove);
+            imageButtonPreparationDelete = itemView.findViewById(R.id.preparationDelete);
         }
 
     }

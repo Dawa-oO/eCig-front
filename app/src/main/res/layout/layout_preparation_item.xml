@@ -22,7 +22,7 @@
                 android:layout_height="120dp"
                 android:padding="4dp" />
 
-            <!-- Gout -->
+            <!-- Gout - delete -->
             <TextView
                 android:id="@+id/preparationTaste"
                 android:layout_width="wrap_content"
@@ -31,6 +31,14 @@
                 android:layout_toEndOf="@id/preparationImageView"
                 android:text="Arome"
                 android:textStyle="bold" />
+            <ImageButton
+                android:id="@+id/preparationDelete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:backgroundTint="#FFFFFF"
+                app:srcCompat="@drawable/ic_delete" />
 
             <!-- Capacity - mL-->
             <TextView
