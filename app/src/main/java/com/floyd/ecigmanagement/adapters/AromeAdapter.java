@@ -1,6 +1,7 @@
 package com.floyd.ecigmanagement.adapters;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.floyd.ecigmanagement.R;
@@ -131,6 +133,58 @@ public class AromeAdapter extends RecyclerView.Adapter<AromeAdapter.AromeViewHol
 
             }
         });
+
+        holder.imageButtonDeleteArome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG, "Button delete arome clicked; AromeID = " + aromeUioItem.getId());
+
+                // -- Yes / No modal
+                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which){
+                            case DialogInterface.BUTTON_POSITIVE:
+                                if (aromeUioItem.getId() > 0) {
+                                    Call<Boolean> call = aromeService.deleteArome(aromeUioItem.getId());
+
+                                    call.enqueue(new Callback<Boolean>() {
+                                        @Override
+                                        public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                                            if (response.isSuccessful()) {
+                                                Boolean responseDelete = response.body();
+                                                if (responseDelete.booleanValue()) {
+                                                    Log.d(TAG, "Arome is deleted");
+                                                    aromeUioList.remove(position);
+                                                    notifyItemRemoved(position);
+                                                } else {
+                                                    Log.d(TAG, "An error occured when deleting arome (object in DB or image");
+                                                }
+                                            } else {
+                                                Log.d(TAG, response.errorBody().toString());
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onFailure(Call<Boolean> call, Throwable t) {
+                                            Log.e(TAG, "Error when deleting arome quantity : " + t);
+                                        }
+                                    });
+                                }
+                                break;
+
+                            case DialogInterface.BUTTON_NEGATIVE:
+                                //No button clicked
+                                break;
+                        }
+                    }
+                };
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(mCtx);
+                builder.setMessage("Êtes-vous sûr ? Les préparations à base de cet arome seront également supprimées").setPositiveButton("Yes", dialogClickListener)
+                        .setNegativeButton("No", dialogClickListener).show();
+            }
+        });
     }
 
     private String constructAromeImageUrl(int id) {
@@ -147,7 +201,7 @@ public class AromeAdapter extends RecyclerView.Adapter<AromeAdapter.AromeViewHol
 
         ImageView aromeImageView;
         TextView textViewTaste, textViewCapacity, textViewBrand, textViewNote, textViewQuantity;
-        ImageButton imageButtonRemove, imageButtonAdd;
+        ImageButton imageButtonRemove, imageButtonAdd, imageButtonDeleteArome;
 
         public AromeViewHolder(View itemView) {
             super(itemView);
@@ -162,7 +216,7 @@ public class AromeAdapter extends RecyclerView.Adapter<AromeAdapter.AromeViewHol
 
             imageButtonAdd = itemView.findViewById(R.id.aromeQuantityAdd);
             imageButtonRemove = itemView.findViewById(R.id.aromeQuantityRemove);
-
+            imageButtonDeleteArome = itemView.findViewById(R.id.aromeDelete);
         }
     }
 }

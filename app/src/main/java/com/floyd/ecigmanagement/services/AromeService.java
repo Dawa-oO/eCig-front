@@ -8,6 +8,7 @@ import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
@@ -29,4 +30,7 @@ public interface AromeService {
 
     @PUT("arome/{id}/quantity")
     Call<Arome> updateAromeQuantity(@Body int newQuantity, @Path("id") int id);
+
+    @DELETE("arome/{id}")
+    Call<Boolean> deleteArome(@Path("id") int id);
 }
